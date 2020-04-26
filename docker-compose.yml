@@ -1,0 +1,9 @@
+version: '2'
+services:
+    map:
+        build: .
+        command: python main.py
+        volumes:
+            - .:/code
+        ports:
+            - "8006:8006"
