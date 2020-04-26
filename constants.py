@@ -12,3 +12,6 @@ REGIONS = (
     (REGION_OCEANIA, 'Oceania'),
     (REGION_POLAR, 'Polar'),
 )
+
+CURRENT_DATABASE_DRIVER = 'sqlite'
+CURRENT_DATABASE_HOST = 'local.sqlite'

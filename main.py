@@ -27,6 +27,7 @@ class TableOfCountries:
         report = CountryReport(countries)
         report.print()
         report.export()
+        # report.save()
 
 
 if __name__ == "__main__":
