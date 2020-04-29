@@ -2,7 +2,10 @@ version: '2'
 services:
     map:
         build: .
-        command: python main.py
+        command: >
+            sh -c "
+                python tests.py &&
+                python main.py"
         volumes:
             - .:/code
         ports:

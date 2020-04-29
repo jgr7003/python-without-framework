@@ -4,24 +4,33 @@ import sqlite3
 class SqliteDriver:
 
     def __init__(self, database):
-        conn = sqlite3.connect(database)
-        self.cursor = conn.cursor()
+        # database = 'local.sqlite'
+        self.database = database
+
+    def connect(self):
+        conn = sqlite3.connect(self.database)
+        # conn = sqlite3.connect(database)
+        return conn
 
     def exec(self, sql):
-        self.cursor.execute(sql)
+        conn = self.connect()
+        cursor = conn.cursor()
+        return cursor.execute(sql)
 
     def get(self, sql):
-        self.exec(sql)
+        cursor = self.exec(sql)
         rows = []
-        for row in self.cursor:
+        for row in cursor:
             rows.append(row)
         return rows
 
     def insert(self, sql, values):
-        self.cursor(sql, values)
-
-    def confirm(self):
-        self.cursor.close()
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute(sql, values)
+        conn.commit()
+        cursor.close()
+        return cursor.lastrowid
 
 
 class Orm:
@@ -40,6 +49,3 @@ class Orm:
 
     def insert(self, sql, values):
         self.driver.insert(sql, values)
-
-    def confirm(self):
-        self.driver.confirm()

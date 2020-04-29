@@ -3,10 +3,13 @@ from models import Country
 from reports import CountryReport
 
 
-class TableOfCountries:
+class Main:
 
-    @staticmethod
-    def main():
+    def start(self):
+        countries = self.get_list_of_countries()
+        self.create_countries_report(countries)
+
+    def get_list_of_countries(self):
         region_api = RegionApi()
         regions = region_api.list()
         countries = []
@@ -23,7 +26,9 @@ class TableOfCountries:
                 time=any_country['time']
             )
             countries.append(country.__dict__)
+        return countries
 
+    def create_countries_report(self, countries):
         report = CountryReport(countries)
         report.print()
         report.export()
@@ -31,4 +36,6 @@ class TableOfCountries:
 
 
 if __name__ == "__main__":
-    TableOfCountries.main()
+    main = Main()
+    main.start()
+

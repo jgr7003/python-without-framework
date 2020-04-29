@@ -35,5 +35,3 @@ class CountryReport:
             values = [row['_region'], row['capital'], row['_language'], row['time']]
             insert_id = orm.insert(sql, values)
             print(f"Insert id: {insert_id}")
-
-        orm.confirm()
